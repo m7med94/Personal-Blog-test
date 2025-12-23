@@ -13,56 +13,56 @@ const PostDetail: React.FC<PostDetailProps> = ({ post, onBack }) => {
     <div className="max-w-4xl mx-auto py-12 px-4 relative">
       <button 
         onClick={onBack}
-        className="mb-8 flex items-center text-indigo-600 hover:text-indigo-800 font-medium transition-colors"
+        className="mb-8 flex items-center text-indigo-400 hover:text-indigo-300 font-semibold transition-colors group"
       >
-        <i className="fa-solid fa-arrow-left mr-2"></i>
+        <i className="fa-solid fa-arrow-left mr-2 transform group-hover:-translate-x-1 transition-transform"></i>
         Back to Feed
       </button>
 
       <div className="mb-10 text-center">
-        <span className="bg-indigo-100 text-indigo-700 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-4 inline-block">
+        <span className="bg-indigo-500/10 text-indigo-400 text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-6 inline-block border border-indigo-500/20">
           {post.category}
         </span>
-        <h1 className="text-4xl md:text-6xl font-bold text-slate-900 mb-6 leading-tight">
+        <h1 className="text-4xl md:text-6xl font-bold text-slate-50 mb-8 leading-tight">
           {post.title}
         </h1>
-        <div className="flex items-center justify-center space-x-4 text-slate-500 text-sm">
+        <div className="flex items-center justify-center space-x-6 text-slate-400 text-sm">
           <div className="flex items-center">
-            <div className="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-slate-600 font-bold mr-2">
+            <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-indigo-400 font-bold mr-3 border border-slate-700 shadow-xl">
               {post.author.charAt(0)}
             </div>
-            <span>By {post.author}</span>
+            <span className="font-semibold text-slate-200">By {post.author}</span>
           </div>
-          <span>•</span>
-          <span>{post.date}</span>
-          <span>•</span>
-          <span>{post.readTime}</span>
+          <span className="text-slate-700">|</span>
+          <span className="font-medium">{post.date}</span>
+          <span className="text-slate-700">|</span>
+          <span className="font-medium">{post.readTime}</span>
         </div>
       </div>
 
-      <div className="rounded-3xl overflow-hidden mb-12 shadow-2xl">
-        <img src={post.imageUrl} alt={post.title} className="w-full h-[400px] object-cover" />
+      <div className="rounded-[2.5rem] overflow-hidden mb-16 shadow-2xl shadow-indigo-500/5 border border-slate-800">
+        <img src={post.imageUrl} alt={post.title} className="w-full h-[400px] md:h-[500px] object-cover brightness-90" />
       </div>
 
-      <article className="prose prose-slate lg:prose-xl mx-auto text-slate-700 leading-relaxed whitespace-pre-line">
+      <article className="prose prose-invert prose-slate lg:prose-xl mx-auto text-slate-300 leading-relaxed whitespace-pre-line prose-headings:text-slate-50 prose-strong:text-slate-50 prose-a:text-indigo-400">
         {post.content}
       </article>
 
-      <div className="mt-16 pt-10 border-t border-slate-200">
-        <h3 className="text-2xl font-bold mb-6">About the Author</h3>
-        <div className="flex items-start space-x-6 bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
-          <div className="w-20 h-20 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 text-3xl font-bold shrink-0">
+      <div className="mt-20 pt-12 border-t border-slate-800">
+        <h3 className="text-2xl font-bold mb-8 text-slate-50">About the Author</h3>
+        <div className="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8 bg-slate-900 p-8 md:p-10 rounded-[2rem] shadow-sm border border-slate-800">
+          <div className="w-24 h-24 rounded-3xl bg-indigo-900/30 flex items-center justify-center text-indigo-400 text-4xl font-bold shrink-0 border border-indigo-500/20">
             {post.author.charAt(0)}
           </div>
-          <div>
-            <h4 className="text-xl font-bold mb-2">{post.author}</h4>
-            <p className="text-slate-600 text-sm">
-              Passionate writer, developer, and design enthusiast. Alex explores the intersection of human creativity and technological advancement.
+          <div className="text-center md:text-left">
+            <h4 className="text-2xl font-bold mb-3 text-slate-50">{post.author}</h4>
+            <p className="text-slate-400 text-base leading-relaxed mb-6">
+              Passionate writer, developer, and design enthusiast. Alex explores the intersection of human creativity and technological advancement in our rapidly changing world.
             </p>
-            <div className="flex space-x-4 mt-4">
-              <a href="#" className="text-slate-400 hover:text-indigo-600 transition-colors"><i className="fa-brands fa-twitter"></i></a>
-              <a href="#" className="text-slate-400 hover:text-indigo-600 transition-colors"><i className="fa-brands fa-github"></i></a>
-              <a href="#" className="text-slate-400 hover:text-indigo-600 transition-colors"><i className="fa-brands fa-linkedin"></i></a>
+            <div className="flex justify-center md:justify-start space-x-5">
+              <a href="#" className="text-slate-500 hover:text-indigo-400 transition-all text-xl"><i className="fa-brands fa-twitter"></i></a>
+              <a href="#" className="text-slate-500 hover:text-indigo-400 transition-all text-xl"><i className="fa-brands fa-github"></i></a>
+              <a href="#" className="text-slate-500 hover:text-indigo-400 transition-all text-xl"><i className="fa-brands fa-linkedin"></i></a>
             </div>
           </div>
         </div>

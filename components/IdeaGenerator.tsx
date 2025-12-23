@@ -16,14 +16,14 @@ const IdeaGenerator: React.FC = () => {
   };
 
   return (
-    <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-100">
-      <div className="flex items-center space-x-3 mb-6">
-        <div className="w-10 h-10 bg-indigo-100 rounded-xl flex items-center justify-center text-indigo-600">
-          <i className="fa-solid fa-lightbulb"></i>
+    <div className="bg-slate-900 rounded-3xl p-8 shadow-sm border border-slate-800">
+      <div className="flex items-center space-x-4 mb-6">
+        <div className="w-12 h-12 bg-indigo-500/10 rounded-2xl flex items-center justify-center text-indigo-400 border border-indigo-500/20 shadow-lg">
+          <i className="fa-solid fa-lightbulb text-xl"></i>
         </div>
         <div>
-          <h3 className="text-xl font-bold">Content Spark</h3>
-          <p className="text-sm text-slate-500">Generate post ideas with Gemini AI</p>
+          <h3 className="text-xl font-bold text-slate-100">Content Spark</h3>
+          <p className="text-xs text-slate-500 font-medium">Idea Engine powered by Gemini</p>
         </div>
       </div>
 
@@ -32,26 +32,32 @@ const IdeaGenerator: React.FC = () => {
           type="text" 
           value={topic}
           onChange={(e) => setTopic(e.target.value)}
-          placeholder="Enter a topic (e.g. Hiking, Coding, Cooking)"
-          className="flex-1 bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          placeholder="Topic (e.g. AI, Space, Art)"
+          className="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 text-slate-100 placeholder-slate-500"
         />
         <button 
           onClick={handleGenerate}
           disabled={isLoading || !topic.trim()}
-          className="bg-indigo-600 text-white px-6 py-3 rounded-xl hover:bg-indigo-700 transition-all font-bold disabled:opacity-50"
+          className="bg-indigo-600 text-white px-5 py-3 rounded-xl hover:bg-indigo-700 transition-all font-bold disabled:opacity-50 shadow-lg shadow-indigo-900/20"
         >
-          {isLoading ? <i className="fa-solid fa-circle-notch animate-spin"></i> : 'Spark'}
+          {isLoading ? <i className="fa-solid fa-circle-notch animate-spin"></i> : <i className="fa-solid fa-bolt"></i>}
         </button>
       </div>
 
       {ideas.length > 0 && (
-        <div className="space-y-4">
+        <div className="space-y-4 max-h-80 overflow-y-auto pr-2 custom-scrollbar">
           {ideas.map((idea, idx) => (
-            <div key={idx} className="p-4 rounded-xl bg-slate-50 hover:bg-indigo-50 transition-colors border border-transparent hover:border-indigo-100">
-              <h4 className="font-bold text-slate-800 mb-1">{idea.title}</h4>
-              <p className="text-xs text-slate-500">{idea.outline}</p>
+            <div key={idx} className="p-4 rounded-2xl bg-slate-800/50 hover:bg-slate-800 transition-all border border-slate-800 hover:border-indigo-500/30 group cursor-default">
+              <h4 className="font-bold text-slate-100 mb-2 group-hover:text-indigo-400 transition-colors leading-snug">{idea.title}</h4>
+              <p className="text-xs text-slate-400 leading-relaxed font-medium">{idea.outline}</p>
             </div>
           ))}
+        </div>
+      )}
+      
+      {ideas.length === 0 && !isLoading && (
+        <div className="text-center py-6 border-2 border-dashed border-slate-800 rounded-2xl">
+          <p className="text-xs text-slate-600 font-medium italic">Your next great post starts here...</p>
         </div>
       )}
     </div>
