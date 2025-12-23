@@ -4,6 +4,7 @@ import { MOCK_POSTS, CATEGORIES } from './constants';
 import { Category, BlogPost } from './types';
 import PostCard from './components/PostCard';
 import PostDetail from './components/PostDetail';
+import IdeaGenerator from './components/IdeaGenerator';
 
 const App: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<Category>('All');
@@ -134,6 +135,9 @@ const App: React.FC = () => {
 
               {/* Sidebar */}
               <aside className="lg:col-span-4 space-y-12">
+                {/* AI Idea Generator Widget */}
+                <IdeaGenerator />
+
                 {/* About Me Widget */}
                 <div className="bg-slate-900 rounded-3xl p-8 shadow-sm border border-slate-800">
                   <div className="w-24 h-24 rounded-full bg-slate-800 mx-auto mb-6 flex items-center justify-center text-4xl text-indigo-400 font-bold overflow-hidden border-2 border-slate-700">

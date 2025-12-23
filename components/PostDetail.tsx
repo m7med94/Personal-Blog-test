@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { BlogPost } from '../types';
+import AIAssistant from './AIAssistant';
 
 interface PostDetailProps {
   post: BlogPost;
@@ -46,6 +47,9 @@ const PostDetail: React.FC<PostDetailProps> = ({ post, onBack }) => {
       <article className="prose prose-invert prose-slate lg:prose-xl mx-auto text-slate-300 leading-relaxed whitespace-pre-line prose-headings:text-slate-50 prose-strong:text-slate-50 prose-a:text-indigo-400">
         {post.content}
       </article>
+
+      {/* AI Assistant allows users to summarize or ask questions about the article */}
+      <AIAssistant postContent={post.content} />
 
       <div className="mt-20 pt-12 border-t border-slate-800">
         <h3 className="text-2xl font-bold mb-8 text-slate-50">About the Author</h3>
