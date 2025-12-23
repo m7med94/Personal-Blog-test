@@ -11,8 +11,11 @@ export interface BlogPost {
   readTime: string;
 }
 
-export type Category = 'All' | 'Technology' | 'Lifestyle' | 'Design' | 'AI' | 'Personal';
+export type Category = 'All' | 'Tech' | 'Culture' | 'Design' | 'Future';
 
+/**
+ * Represents a single message in a chat conversation.
+ */
 export interface ChatMessage {
   role: 'user' | 'assistant';
   content: string;

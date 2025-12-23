@@ -29,170 +29,120 @@ const App: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const featuredPost = MOCK_POSTS[0];
+  if (selectedPost) {
+    return <PostDetail post={selectedPost} onBack={() => setSelectedPostId(null)} />;
+  }
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans">
+    <div className="min-h-screen bg-black text-white selection:bg-emerald-500 selection:text-black">
+      {/* Structural Borders */}
+      <div className="fixed inset-0 pointer-events-none border-[12px] border-white/5 z-50"></div>
+      
       {/* Navigation */}
-      <nav className="sticky top-0 z-40 bg-slate-950/80 backdrop-blur-md border-b border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div 
-            onClick={() => setSelectedPostId(null)}
-            className="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent cursor-pointer"
-          >
-            LUMINA.
-          </div>
-          
-          <div className="hidden md:flex items-center space-x-8">
-            {CATEGORIES.map(cat => (
-              <button 
-                key={cat}
-                onClick={() => { setSelectedCategory(cat); setSelectedPostId(null); }}
-                className={`text-sm font-medium transition-colors ${selectedCategory === cat ? 'text-indigo-400' : 'text-slate-400 hover:text-indigo-400'}`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-
-          <div className="flex items-center space-x-4">
-            <div className="relative hidden sm:block">
-              <input 
-                type="text" 
-                placeholder="Search..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="bg-slate-900 border-none rounded-full px-4 py-1.5 text-sm focus:ring-2 focus:ring-indigo-500 w-48 text-slate-100 placeholder-slate-500 transition-all"
-              />
-              <i className="fa-solid fa-magnifying-glass absolute right-3 top-2 text-slate-500 text-xs"></i>
-            </div>
-            <button className="bg-indigo-600 text-white px-5 py-2 rounded-full text-sm font-bold shadow-lg shadow-indigo-900/20 hover:bg-indigo-700 transition-all">
-              Subscribe
+      <nav className="fixed top-0 left-0 right-0 z-40 px-12 h-24 flex items-center justify-between border-b border-white/10 bg-black/80 backdrop-blur-sm">
+        <div 
+          onClick={() => setSelectedPostId(null)}
+          className="text-xl font-bold tracking-[0.4em] uppercase cursor-pointer hover:text-emerald-500 transition-colors"
+        >
+          Aura<span className="text-emerald-500">.</span>
+        </div>
+        
+        <div className="hidden md:flex items-center space-x-12">
+          {CATEGORIES.map(cat => (
+            <button 
+              key={cat}
+              onClick={() => setSelectedCategory(cat)}
+              className={`mono text-[10px] uppercase tracking-widest transition-all ${selectedCategory === cat ? 'text-emerald-500' : 'text-white/40 hover:text-white'}`}
+            >
+              {cat}
             </button>
+          ))}
+        </div>
+
+        <div className="flex items-center space-x-8">
+          <div className="relative group">
+            <input 
+              type="text" 
+              placeholder="SEARCH"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="bg-transparent border-b border-white/10 py-1 mono text-[10px] w-32 focus:w-48 focus:border-emerald-500 outline-none transition-all placeholder:text-white/10"
+            />
           </div>
+          <button className="mono text-[10px] border border-white/20 px-6 py-2 hover:bg-white hover:text-black transition-all">
+            NEWSLETTER
+          </button>
         </div>
       </nav>
 
-      {/* Main Content */}
-      <main>
-        {selectedPost ? (
-          <PostDetail post={selectedPost} onBack={() => setSelectedPostId(null)} />
-        ) : (
-          <div className="max-w-7xl mx-auto px-4 py-12">
-            {/* Featured Post */}
-            {!searchQuery && selectedCategory === 'All' && (
-              <div 
-                onClick={() => handlePostClick(featuredPost.id)}
-                className="relative h-[450px] md:h-[600px] rounded-3xl overflow-hidden mb-16 cursor-pointer group shadow-2xl shadow-indigo-500/5"
-              >
-                <img 
-                  src={featuredPost.imageUrl} 
-                  alt={featuredPost.title} 
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 brightness-75 group-hover:brightness-90"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent flex flex-col justify-end p-8 md:p-16">
-                  <span className="bg-indigo-600 text-white text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-widest mb-4 w-fit">
-                    Featured
-                  </span>
-                  <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 max-w-2xl leading-tight">
-                    {featuredPost.title}
-                  </h2>
-                  <p className="text-slate-200 text-lg mb-8 max-w-xl line-clamp-2">
-                    {featuredPost.excerpt}
-                  </p>
-                  <div className="flex items-center space-x-4 text-slate-400 text-sm font-medium">
-                    <span className="text-slate-100">{featuredPost.author}</span>
-                    <span>•</span>
-                    <span>{featuredPost.date}</span>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-              {/* Blog Feed */}
-              <div className="lg:col-span-8">
-                <div className="flex items-center justify-between mb-8">
-                  <h2 className="text-3xl font-bold text-slate-50">
-                    {searchQuery ? `Search Results for "${searchQuery}"` : `${selectedCategory} Stories`}
-                  </h2>
-                  <div className="text-sm text-slate-500">{filteredPosts.length} posts found</div>
-                </div>
-
-                {filteredPosts.length > 0 ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    {filteredPosts.map(post => (
-                      <PostCard key={post.id} post={post} onClick={handlePostClick} />
-                    ))}
-                  </div>
-                ) : (
-                  <div className="text-center py-24 bg-slate-900 rounded-3xl border border-slate-800 shadow-sm">
-                    <i className="fa-solid fa-ghost text-slate-700 text-6xl mb-4"></i>
-                    <p className="text-slate-400 text-lg">No stories found matching your criteria.</p>
-                  </div>
-                )}
-              </div>
-
-              {/* Sidebar */}
-              <aside className="lg:col-span-4 space-y-12">
-                {/* AI Idea Generator Widget */}
-                <IdeaGenerator />
-
-                {/* About Me Widget */}
-                <div className="bg-slate-900 rounded-3xl p-8 shadow-sm border border-slate-800">
-                  <div className="w-24 h-24 rounded-full bg-slate-800 mx-auto mb-6 flex items-center justify-center text-4xl text-indigo-400 font-bold overflow-hidden border-2 border-slate-700">
-                    <img src="https://picsum.photos/seed/profile/200/200" alt="Author" className="w-full h-full object-cover" />
-                  </div>
-                  <h3 className="text-xl font-bold text-center mb-2 text-slate-100">Alex Rivers</h3>
-                  <p className="text-center text-slate-400 text-sm mb-6 leading-relaxed">
-                    A tech explorer documenting the evolution of our digital world. Writing about AI, Design, and the future of humans.
-                  </p>
-                  <div className="flex justify-center space-x-4">
-                    <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-indigo-900/50 hover:text-indigo-400 transition-all"><i className="fa-brands fa-twitter"></i></a>
-                    <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-indigo-900/50 hover:text-indigo-400 transition-all"><i className="fa-brands fa-instagram"></i></a>
-                    <a href="#" className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-indigo-900/50 hover:text-indigo-400 transition-all"><i className="fa-brands fa-medium"></i></a>
-                  </div>
-                </div>
-
-                {/* Newsletter Widget */}
-                <div className="bg-indigo-600 rounded-3xl p-8 text-white relative overflow-hidden shadow-xl shadow-indigo-950/20">
-                  <div className="absolute top-0 right-0 p-4 opacity-10">
-                    <i className="fa-solid fa-envelope-open-text text-8xl -rotate-12"></i>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-4 relative z-10">Lumina Insider</h3>
-                  <p className="text-indigo-100 text-sm mb-6 relative z-10 leading-relaxed">
-                    Get weekly insights on the future of technology delivered straight to your inbox.
-                  </p>
-                  <input 
-                    type="email" 
-                    placeholder="name@email.com" 
-                    className="w-full bg-indigo-500/50 border border-indigo-400/30 text-white placeholder-indigo-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-white/50 mb-4"
-                  />
-                  <button className="w-full bg-white text-indigo-600 font-bold py-3 rounded-xl hover:bg-indigo-50 transition-all">
-                    Sign Up
-                  </button>
-                </div>
-              </aside>
+      {/* Hero Section */}
+      <header className="pt-48 pb-20 px-12 border-b border-white/10">
+        <div className="max-w-7xl mx-auto">
+          <p className="mono text-[10px] text-emerald-500 uppercase tracking-[0.5em] mb-8">Quarterly Journal — 2024</p>
+          <h1 className="text-[10vw] font-light leading-none tracking-tighter mb-12">
+            The New <br />
+            <span className="italic">Perspective</span>
+          </h1>
+          <div className="flex items-end justify-between">
+            <p className="max-w-md text-white/40 text-lg font-light leading-relaxed">
+              Curating the intersection of technology, human behavior, and the architectural silence of minimalist design.
+            </p>
+            <div className="text-right hidden md:block">
+              <p className="mono text-[10px] text-white/20 uppercase">Local Time</p>
+              <p className="mono text-sm text-white/60">{new Date().toLocaleTimeString()}</p>
             </div>
           </div>
-        )}
+        </div>
+      </header>
+
+      {/* Feed Grid */}
+      <main className="px-12 py-32">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-r border-b border-white/10">
+            {filteredPosts.map((post, idx) => (
+              <div key={post.id} className={`border-t border-white/10 ${idx % 3 !== 2 ? 'lg:border-r border-white/10' : ''}`}>
+                <PostCard post={post} onClick={handlePostClick} />
+              </div>
+            ))}
+          </div>
+
+          {filteredPosts.length === 0 && (
+            <div className="py-40 text-center border-t border-white/10">
+              <p className="mono text-xs text-white/20 uppercase tracking-widest">No entries found in this sector</p>
+            </div>
+          )}
+
+          {/* AI Idea Generator Section */}
+          <div className="mt-32 max-w-2xl mx-auto border-t border-white/10 pt-32">
+            <IdeaGenerator />
+          </div>
+        </div>
       </main>
 
-      {/* Footer */}
-      <footer className="bg-slate-950 border-t border-slate-800 py-16 mt-20">
-        <div className="max-w-7xl mx-auto px-4 text-center">
-          <div className="text-3xl font-bold bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent mb-8">
-            LUMINA.
+      {/* Minimal Footer */}
+      <footer className="px-12 py-24 border-t border-white/10">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-12">
+          <div className="text-xl font-bold tracking-[0.4em] uppercase">Aura.</div>
+          <div className="flex gap-16">
+            <div className="space-y-4">
+              <p className="mono text-[10px] text-white/20 uppercase">Social</p>
+              <div className="flex flex-col gap-2">
+                <a href="#" className="mono text-[10px] hover:text-emerald-500 transition-colors">TWITTER</a>
+                <a href="#" className="mono text-[10px] hover:text-emerald-500 transition-colors">SUBSTACK</a>
+              </div>
+            </div>
+            <div className="space-y-4">
+              <p className="mono text-[10px] text-white/20 uppercase">Legal</p>
+              <div className="flex flex-col gap-2">
+                <a href="#" className="mono text-[10px] hover:text-emerald-500 transition-colors">PRIVACY</a>
+                <a href="#" className="mono text-[10px] hover:text-emerald-500 transition-colors">TERMS</a>
+              </div>
+            </div>
           </div>
-          <div className="flex flex-wrap justify-center gap-x-12 gap-y-4 mb-12">
-            <a href="#" className="text-slate-400 hover:text-indigo-400 transition-colors">About</a>
-            <a href="#" className="text-slate-400 hover:text-indigo-400 transition-colors">Privacy Policy</a>
-            <a href="#" className="text-slate-400 hover:text-indigo-400 transition-colors">Terms of Service</a>
-            <a href="#" className="text-slate-400 hover:text-indigo-400 transition-colors">Contact</a>
+          <div className="text-right">
+            <p className="mono text-[10px] text-white/20 uppercase">&copy; 2024 Aura Media Group</p>
+            <p className="mono text-[10px] text-white/10 mt-1 uppercase">Building in silence.</p>
           </div>
-          <p className="text-slate-600 text-sm font-medium">
-            © {new Date().getFullYear()} Lumina Personal Blog.
-          </p>
         </div>
       </footer>
     </div>

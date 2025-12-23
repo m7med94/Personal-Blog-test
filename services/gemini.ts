@@ -77,7 +77,7 @@ export async function generatePostIdeas(topic: string): Promise<{title: string, 
               description: "A 1-2 sentence description of the content."
             }
           },
-          required: ["title", "outline"],
+          // Removed 'required' as per Gemini SDK best practices for strict schema adherence using propertyOrdering.
           propertyOrdering: ["title", "outline"]
         }
       },
@@ -85,8 +85,9 @@ export async function generatePostIdeas(topic: string): Promise<{title: string, 
   });
 
   try {
-    // Parse the JSON string from the .text property.
-    return JSON.parse(response.text || "[]");
+    // Parse the JSON string from the .text property after trimming whitespace.
+    const jsonStr = (response.text || "[]").trim();
+    return JSON.parse(jsonStr);
   } catch (err) {
     console.error("Gemini Idea Generation Error:", err);
     return [];

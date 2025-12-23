@@ -1,70 +1,64 @@
 
 import { BlogPost, Category } from './types';
 
-export const CATEGORIES: Category[] = ['All', 'Technology', 'Lifestyle', 'Design', 'AI', 'Personal'];
+export const CATEGORIES: Category[] = ['All', 'Tech', 'Culture', 'Design', 'Future'];
 
 export const MOCK_POSTS: BlogPost[] = [
   {
     id: '1',
-    title: 'The Future of Web Development in 2025',
-    excerpt: 'Exploring how AI and edge computing are reshaping the way we build and deploy applications.',
+    title: 'The Architecture of Silence',
+    excerpt: 'In an era of digital noise, minimalist interface design isn\'t a choice—it\'s a survival mechanism.',
     content: `
-      The landscape of web development is shifting faster than ever. By 2025, we are likely to see a convergence of several major trends:
+      ## The Noise Floor
+      Digital interfaces have reached a saturation point. Every pixel competes for attention, and every animation is a nudge. 
       
-      ## 1. AI-Driven Coding
-      Generative AI isn't just writing snippets anymore; it's architecting entire systems. Developers are becoming "System Prompters" rather than syntax experts.
+      ## The Antidote
+      Aura is built on the principle of the 'Noise Floor'. By lowering the baseline stimulation, we allow the content to resonate. 
       
-      ## 2. The Edge is the New Cloud
-      Latency is the ultimate enemy. Moving computation to the edge ensures that users get lightning-fast responses regardless of their geographic location.
-      
-      ## 3. WebAssembly (Wasm) Maturity
-      We are seeing more desktop-grade applications running in the browser thanks to the maturity of Wasm. From video editors to CAD software, the browser is becoming the universal OS.
-      
-      Conclusion: Stay curious, stay adaptable. The tools will change, but the problem-solving core remains.
+      - **Negative Space**: Not empty, but active.
+      - **Type as Form**: Let the letters carry the weight.
+      - **Contextual Clarity**: Only show what is needed, exactly when it is needed.
+
+      Design is not what it looks like; it's how it focuses the mind.
     `,
-    category: 'Technology',
-    author: 'Alex Rivers',
-    date: 'Oct 24, 2024',
-    imageUrl: 'https://picsum.photos/seed/tech/800/600',
-    readTime: '5 min read'
+    category: 'Design',
+    author: 'Aura Editor',
+    date: '2024.10.28',
+    imageUrl: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=1200',
+    readTime: '4m'
   },
   {
     id: '2',
-    title: 'Minimalist Design: Less is Actually More',
-    excerpt: 'Why stripping away the clutter leads to better user experiences and clearer communication.',
+    title: 'Post-Quantum Web3',
+    excerpt: 'What happens to decentralized systems when encryption becomes obsolete?',
     content: `
-      Minimalism isn't about the absence of things; it's about the presence of value.
+      The horizon of quantum computing is closer than we anticipated. 
       
-      When we design with a minimalist mindset, we are forced to prioritize what truly matters to the user.
+      ### The Vulnerability
+      Most blockchain technologies rely on elliptical curve cryptography. In a post-quantum world, these are trivial to break.
       
-      ### Key Principles:
-      - Whitespace as a layout tool.
-      - Typography that speaks for itself.
-      - Purposeful color palettes.
-      
-      By removing distractions, we guide the user's eye to the call to action, the content, and the core message.
+      ### The Solution
+      Lattice-based cryptography and other 'Quantum Resistant' algorithms are the new standard. We must rebuild the foundation before the walls are breached.
     `,
-    category: 'Design',
-    author: 'Sam Chen',
-    date: 'Oct 22, 2024',
-    imageUrl: 'https://picsum.photos/seed/design/800/600',
-    readTime: '3 min read'
+    category: 'Tech',
+    author: 'Aura Editor',
+    date: '2024.10.25',
+    imageUrl: 'https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&q=80&w=1200',
+    readTime: '6m'
   },
   {
     id: '3',
-    title: 'My Journey into Generative AI',
-    excerpt: 'Reflections on the first year of building products with Large Language Models.',
+    title: 'Synthetic Realism',
+    excerpt: 'The blur between generated and captured photography is now permanent.',
     content: `
-      It started with a simple API call. One year later, my entire workflow has been transformed.
+      We no longer live in a world of 'fake' and 'real'. We live in a world of 'Intentional Reality'.
       
-      Generative AI has enabled me to build features that were previously impossible for a solo developer. From automated content tagging to intelligent search, the possibilities are endless.
-      
-      However, the biggest lesson I've learned is that AI is an assistant, not a replacement. Human intuition still reigns supreme in creative direction.
+      Synthetic media is becoming the primary tool for creative expression. It allows us to bypass the physical constraints of light and lens to capture the feeling of a moment rather than its photons.
     `,
-    category: 'AI',
-    author: 'Alex Rivers',
-    date: 'Oct 15, 2024',
-    imageUrl: 'https://picsum.photos/seed/ai/800/600',
-    readTime: '7 min read'
+    category: 'Future',
+    author: 'Aura Editor',
+    date: '2024.10.20',
+    imageUrl: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=1200',
+    readTime: '3m'
   }
 ];

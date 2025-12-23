@@ -11,39 +11,37 @@ const PostCard: React.FC<PostCardProps> = ({ post, onClick }) => {
   return (
     <div 
       onClick={() => onClick(post.id)}
-      className="group bg-slate-900 rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-indigo-900/10 transition-all duration-300 cursor-pointer border border-slate-800 flex flex-col h-full"
+      className="group relative border-l border-white/10 hover:border-emerald-500 transition-all duration-500 cursor-pointer py-8 pl-8"
     >
-      <div className="relative h-48 overflow-hidden">
-        <img 
-          src={post.imageUrl} 
-          alt={post.title} 
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 brightness-90 group-hover:brightness-100"
-        />
-        <div className="absolute top-4 left-4">
-          <span className="bg-indigo-600 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest shadow-lg">
+      <div className="flex flex-col h-full">
+        <div className="flex items-center space-x-4 mb-4">
+          <span className="mono text-[10px] uppercase tracking-tighter text-emerald-500 font-bold bg-emerald-500/10 px-2 py-0.5 border border-emerald-500/20">
             {post.category}
           </span>
+          <span className="mono text-[10px] text-white/40">{post.date}</span>
         </div>
-      </div>
-      <div className="p-6 flex flex-col flex-grow">
-        <div className="flex items-center text-xs text-slate-500 mb-3 space-x-3">
-          <span className="font-medium">{post.date}</span>
-          <span>•</span>
-          <span className="font-medium">{post.readTime}</span>
-        </div>
-        <h3 className="text-xl font-bold mb-3 text-slate-100 group-hover:text-indigo-400 transition-colors">
+        
+        <h3 className="text-3xl font-light mb-4 group-hover:translate-x-2 transition-transform duration-500 leading-tight">
           {post.title}
         </h3>
-        <p className="text-slate-400 text-sm line-clamp-3 mb-4 leading-relaxed">
+        
+        <p className="text-white/50 text-sm leading-relaxed mb-6 line-clamp-2 font-light">
           {post.excerpt}
         </p>
-        <div className="mt-auto flex items-center pt-4 border-t border-slate-800">
-          <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center text-indigo-400 font-bold text-xs border border-slate-700">
-            {post.author.charAt(0)}
+        
+        <div className="mt-auto flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            <div className="w-6 h-6 bg-white/5 border border-white/10 flex items-center justify-center text-[10px] mono text-white/60">
+              {post.author.charAt(0)}
+            </div>
+            <span className="text-[10px] mono uppercase tracking-widest text-white/30">{post.author}</span>
           </div>
-          <span className="ml-2 text-xs font-semibold text-slate-300">{post.author}</span>
+          <span className="text-[10px] mono text-white/20 uppercase">{post.readTime}</span>
         </div>
       </div>
+      
+      {/* Decorative dot */}
+      <div className="absolute top-1/2 -left-[5px] w-2 h-2 bg-black border border-white/20 group-hover:border-emerald-500 transition-colors"></div>
     </div>
   );
 };
