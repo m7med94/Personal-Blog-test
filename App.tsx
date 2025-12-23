@@ -4,7 +4,6 @@ import { MOCK_POSTS, CATEGORIES } from './constants';
 import { Category, BlogPost } from './types';
 import PostCard from './components/PostCard';
 import PostDetail from './components/PostDetail';
-import IdeaGenerator from './components/IdeaGenerator';
 
 const App: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<Category>('All');
@@ -32,7 +31,7 @@ const App: React.FC = () => {
   const featuredPost = MOCK_POSTS[0];
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
+    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans">
       {/* Navigation */}
       <nav className="sticky top-0 z-40 bg-slate-950/80 backdrop-blur-md border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
@@ -151,9 +150,6 @@ const App: React.FC = () => {
                   </div>
                 </div>
 
-                {/* AI Feature Widget */}
-                <IdeaGenerator />
-
                 {/* Newsletter Widget */}
                 <div className="bg-indigo-600 rounded-3xl p-8 text-white relative overflow-hidden shadow-xl shadow-indigo-950/20">
                   <div className="absolute top-0 right-0 p-4 opacity-10">
@@ -191,7 +187,7 @@ const App: React.FC = () => {
             <a href="#" className="text-slate-400 hover:text-indigo-400 transition-colors">Contact</a>
           </div>
           <p className="text-slate-600 text-sm font-medium">
-            © {new Date().getFullYear()} Lumina Personal Blog. Powered by Gemini 2.0 Flash & Human Curiosity.
+            © {new Date().getFullYear()} Lumina Personal Blog.
           </p>
         </div>
       </footer>

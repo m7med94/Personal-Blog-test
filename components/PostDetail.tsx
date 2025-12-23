@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { BlogPost } from '../types';
-import AIAssistant from './AIAssistant';
 
 interface PostDetailProps {
   post: BlogPost;
@@ -67,9 +66,6 @@ const PostDetail: React.FC<PostDetailProps> = ({ post, onBack }) => {
           </div>
         </div>
       </div>
-
-      {/* AI Context Hub */}
-      <AIAssistant postContent={post.content} />
     </div>
   );
 };

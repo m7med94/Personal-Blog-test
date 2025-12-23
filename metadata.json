@@ -1,5 +1,5 @@
 {
-  "name": "Lumina Personal Blog & AI Assistant",
-  "description": "A modern, high-performance personal blog featuring an AI writing assistant and interactive chat driven by Gemini 3.5. Includes markdown support, category filtering, and real-time summaries.",
+  "name": "Lumina Personal Blog",
+  "description": "A modern, high-performance personal blog featuring markdown support, category filtering, and a sleek dark-mode aesthetic.",
   "requestFramePermissions": []
 }
